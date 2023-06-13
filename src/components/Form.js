@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const Form = ({ todoData, setTodoData }) => {
+  console.log("Form 랜더링")
   // 새로운 할일 state 변수
   const [value, setValue] = useState("");
 
@@ -8,7 +9,7 @@ const Form = ({ todoData, setTodoData }) => {
   const handleChange = e => {
     setValue(e.target.value);
   };
-  // form  submit 실행시 체크
+  // form  submit 실행시 체크`
   const handleSubmit = e => {
     // 웹 브라우저 url 주소표시창으로 데이터 전송을 막아야함.
     // 마치 a태그의 href 를 막아주듯이.

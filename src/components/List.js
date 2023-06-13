@@ -1,6 +1,7 @@
 import React from "react";
 import ListItem from "./ListItem";
 const List = ({ todoData, setTodoData }) => {
+  console.log("List 랜더링")
   return (
     <div>
       {todoData.map(item => (
@@ -16,4 +17,4 @@ const List = ({ todoData, setTodoData }) => {
   );
 };
 
-export default List;
+export default React.memo(List);
