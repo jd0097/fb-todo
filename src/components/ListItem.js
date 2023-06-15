@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ListItem = ({ item, todoData, setTodoData }) => {
   // console.log("ListItem 렌더링 ", item);
@@ -6,7 +6,10 @@ const ListItem = ({ item, todoData, setTodoData }) => {
   const [isEdit, setIsEdit] = useState(false);
   // 편집 상태 타이틀 설정 state
   const [editTitle, setEditTItle] = useState(item.title);
-
+ 
+  useEffect(()=>{
+setEditTItle(item.title)
+  },[])
   const getStyles = _completed => {
     return {
       padding: "10px",
@@ -23,6 +26,7 @@ const ListItem = ({ item, todoData, setTodoData }) => {
     setTodoData(newTodoData);
     // 로컬스토리지 저장
     localStorage.setItem("fbTodoData", JSON.stringify(newTodoData))
+    // // axios delete 호출 fbtodolist 삭제하기
   };
   const handleEditClick = () => {
     setIsEdit(true);
@@ -43,10 +47,10 @@ const ListItem = ({ item, todoData, setTodoData }) => {
     });
 
     setTodoData(newTodoData);
-    
     // 로컬스토리지 저장
     localStorage.setItem("fbTodoData", JSON.stringify(newTodoData))
     setIsEdit(false);
+     // axios patch/put 호출 fbtodolist 수정하기
   };
   const handleCompleteChange = _id => {
     // id에 해당하는 것만 수정하면 된다 (X)
@@ -63,6 +67,7 @@ const ListItem = ({ item, todoData, setTodoData }) => {
     
     // 로컬스토리지 저장
     localStorage.setItem("fbTodoData", JSON.stringify(newTodoData))
+    // axios patch/put 호출 fbtodolist 수정하기
   };
 
   if (isEdit) {
@@ -73,8 +78,10 @@ const ListItem = ({ item, todoData, setTodoData }) => {
           <input
             className="w-full px-3 py-2 mr-3 text-gray-500 rounded"
             type="text"
-            value={editTitle}
-            onChange={handleEditChange}
+            defaultValue={item.titl}
+          
+            // value={editTitle}
+            onChange={e => handleEditChange(e)}
           />
         </div>
         <div className="items-center">
