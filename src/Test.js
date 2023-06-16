@@ -59,6 +59,7 @@ function App() {
     //입력창 초기화
     setValue("");
   };
+
   return (
     <>
       <div className="container">
@@ -96,6 +97,7 @@ function App() {
           </div>
         </div>
       </div>
+    
     </>
   );
 }

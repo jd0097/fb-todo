@@ -1,64 +1,71 @@
 import React, { useState } from "react";
 
 const Form = ({ todoData, setTodoData }) => {
-  console.log("Form 랜더링")
-  // 새로운 할일 state 변수
+  // add data(state 변수)
   const [value, setValue] = useState("");
 
-  // input type="text"의 value 변경 화면 리랜더링
+  // input type="text"의 value 변경 리랜더링
   const handleChange = e => {
     setValue(e.target.value);
   };
-  // form  submit 실행시 체크`
+
+  // form submit 실행
   const handleSubmit = e => {
-    // 웹 브라우저 url 주소표시창으로 데이터 전송을 막아야함.
-    // 마치 a태그의 href 를 막아주듯이.
+    // 웹 브라우저 URL로 데이터 전송을 막아야 한다.
+    // 마치 a태그의 href 막아주듯이
     e.preventDefault();
     // 새로운 todo 객체를 만들어준다.
-    // 형식 즉, 키명을 구조를 지켜줌.
-    // 정규표현식 처리 예정
-    if (value === "") {
-      alert("내용을 입력하세요.");
-    }
+    // 형식, 즉 데이터의 구조를 지켜주어야 한다.
 
+    // 정규표현식 처리 예정
 
     const newTodo = {
       id: Date.now(),
       title: value,
       completed: false,
     };
-    // state 저장한다. 화면 리랜더링 된다.
-    // todoData 에 추가.
-    // set함수에서(setTodoData) 
-    // 갱신 된 state를 즉시 가지고 오기 위해서는
-    // set함수에 인자로
-    // 콜백함수를 전달한다.
-    setTodoData((prev) => {
-      return [...prev, newTodo];
+    // state에 저장하면 화면이 리랜더링 된다.
+    // todoData에 데이터 추가
+    // set함수 즉 setTodoData에서 state를 가지고 오기 위해서는 set 함수에 인자로 콜백함수를 전달한다.
+    setTodoData(todoData => {
+      return [...todoData, newTodo];
     });
-    console.log(todoData);
-    // 로컬스토리지 저장
+
+    // setTodoData([...todoData, newTodo]);
+    // 로컬 스토리지 저장
     localStorage.setItem("fbTodoData", JSON.stringify([...todoData, newTodo]));
-    // axios post 호출 fbtodolist 추가하기
-    // 입력창 초기화
+    // axios post 호출 fbtodolist 추가하기 (서버로 보냄)
     setValue("");
   };
-
   return (
     <div>
-      <form className="flex pt-2"
-      style={{ display: "flex" }} onSubmit={handleSubmit}>
+      <form
+        className="flex pt-2"
+        style={{
+          display: "flex",
+        }}
+        onSubmit={handleSubmit}
+      >
         <input
+          className="w-full px-3 py-2 mr-4 text-blue-500 border rounded shadow"
           type="text"
           name="value"
-          style={{ flex: "10", padding: "5px" }}
+          style={{
+            flex: "10",
+            padding: "5px",
+          }}
           placeholder="할일을 입력해주세요."
           value={value}
           onChange={handleChange}
-          className="w-full px-3 py-2 mr-4 text-gray-500 border rounded shadow"
         />
-
-        <input type="submit" style={{ flex: "1" }} value="입력"  className="p-2 text-blue-400 border-2 border-blue-400 rounded hover:text-white hover:bg-blue-400"/>
+        <input
+          className="p-2 text-stone-700 border-2 border-stone-600 rounded hover:text-white hover:bg-stone-400 cursor-pointer"
+          type="submit"
+          value="입력"
+          style={{
+            flex: "1",
+          }}
+        />
       </form>
     </div>
   );
