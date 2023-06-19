@@ -1,6 +1,5 @@
 # fireBase를 활용한 Todo 앱 애플리케이션
 
-<br>
 
 
 
@@ -47,10 +46,4 @@ prettier
 
 ### 프로젝트 후기
 
--
 
-<br>
-
-## :handshake: Contact
-
-- 박주희(Joohee Park) : email: pjh9641@gmail.com / Github Link: https://github.com/heeheepark

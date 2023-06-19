@@ -21,9 +21,9 @@ const Header = ({
     navigate("/");
   };
   return (
-    <header className="p-7 bg-bule-300">
+    <header className="p-7 bg-blue-400">
       <div className="flex items-center justify-between">
-        <NavLink to="/" className="text-white hover:text-slate-700">
+        <NavLink to="/" className="text-white hover:text-blue-200">
           로고
         </NavLink>
         <ul className="flex items-center justify-center gap-4">

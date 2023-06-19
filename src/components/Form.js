@@ -1,6 +1,8 @@
-import React, { useState } from "react";
 
-const Form = ({ todoData, setTodoData }) => {
+import React, { useState } from "react";
+import { postTodo } from "../axios/axios";
+
+const Form = ({ todoData, setTodoData, fbName, fbEmail }) => {
   // add data(state 변수)
   const [value, setValue] = useState("");
 
@@ -23,26 +25,44 @@ const Form = ({ todoData, setTodoData }) => {
       id: Date.now(),
       title: value,
       completed: false,
+      author: fbName,
+      email: fbEmail,
     };
     // state에 저장하면 화면이 리랜더링 된다.
     // todoData에 데이터 추가
     // set함수 즉 setTodoData에서 state를 가지고 오기 위해서는 set 함수에 인자로 콜백함수를 전달한다.
-    setTodoData(todoData => {
-      return [...todoData, newTodo];
-    });
 
-    // setTodoData([...todoData, newTodo]);
+    // setTodoData(todoData => {
+    //   return [...todoData, newTodo];
+    // });
+
+    setTodoData([...todoData, newTodo]);
     // 로컬 스토리지 저장
-    localStorage.setItem("fbTodoData", JSON.stringify([...todoData, newTodo]));
+    // localStorage.setItem("fbTodoData", JSON.stringify([...todoData, newTodo]));
     // axios post 호출 fbtodolist 추가하기 (서버로 보냄)
+    // axiosInstance.post("/todos", newTodo)
+    // .then(res => res.data)
+    // .then(data => console.log(data)) 
+    // .catch(error=> console.log(error))
+        
+    // axios get 호출  자료 받기
+      postTodo(newTodo)
+  
+
+
+    // 입력창 초기화
     setValue("");
   };
+
+
+  
+ 
   return (
     <div>
       <form
         className="flex pt-2"
         style={{
-          display: "flex",
+          display: "flex"
         }}
         onSubmit={handleSubmit}
       >
@@ -52,7 +72,7 @@ const Form = ({ todoData, setTodoData }) => {
           name="value"
           style={{
             flex: "10",
-            padding: "5px",
+            padding: "5px"
           }}
           placeholder="할일을 입력해주세요."
           value={value}
@@ -63,7 +83,7 @@ const Form = ({ todoData, setTodoData }) => {
           type="submit"
           value="입력"
           style={{
-            flex: "1",
+            flex: "1"
           }}
         />
       </form>

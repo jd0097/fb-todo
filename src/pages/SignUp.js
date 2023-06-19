@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SignUpDiv from "./../style/UserCss";
+import SignUpDiv from "../style/UserCss";
 import { useNavigate } from "react-router-dom";
 
 // firebase 연동

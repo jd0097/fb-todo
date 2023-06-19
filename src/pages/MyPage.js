@@ -19,7 +19,7 @@ const MyPage = ({
   const [pwConfirm, setPwConfirm] = useState("");
 
 
-useEffect (()=> {
+  useEffect (()=> {
     if(!fbUid) {
       // alert("로그인하세요");
       navigate("/")
@@ -34,11 +34,13 @@ e.preventDefault();
 try{
   await user.updateProfile({
   displayName:nickName,
-  });
+});
+setFBName(nickName);
+setNickName(nickName);
+
+alert("닉네임 정보를 변경하였습니다.")
 }catch(error) {
-  setFBName(nickName);
-  alert("닉네임 정보를 변경하였습니다.")
-  console.log(error.code)
+  console.error(error);
 }
 // console.log("프로필업데이트");
 } 
@@ -82,7 +84,7 @@ const handlerDelete = async e => {
     setFBUid("")
     navigate("/");
   } catch(error) {
-    console.log(error);
+    console.error(error.code);
   }
   };
 
@@ -105,7 +107,8 @@ const handlerDelete = async e => {
             placeholder="별명을 입력하세요."
             onChange={e => setNickName(e.target.value)}
           />
-          <button className="border rounded px-3 py-2 shadow" onClick={handlerNickName}>별칭 변경</button>
+          <button className="border rounded px-3 py-2 shadow" onClick={handlerNickName}>
+            별칭 변경</button>
             </div>
           <div>
           <label htmlFor="">이메일</label>
@@ -115,7 +118,8 @@ const handlerDelete = async e => {
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-           <button  className="border rounded px-3 py-2 shadow" onClick={handlerNickEmail}>이메일 변경</button>
+           <button  className="border rounded px-3 py-2 shadow" onClick={handlerNickEmail}>
+            이메일 변경</button>
           </div>
 
           <div>
@@ -141,8 +145,8 @@ const handlerDelete = async e => {
 
           <input
             type="password"
-            required
             value={pwConfirm}
+            required
             onChange={e => setPwConfirm(e.target.value)}
             minLength={8}
             maxLength={16}
